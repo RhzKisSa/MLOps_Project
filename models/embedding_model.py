@@ -24,5 +24,4 @@ class PhoBERTEmbeddings(Embeddings):
             outputs = self.model(**inputs)
         last_hidden_state = outputs.last_hidden_state  # shape: (1, seq_len, hidden_size)
         embedding = torch.mean(last_hidden_state, dim=1).squeeze()  # mean pooling
-        print(f'embedding shape: {embedding.shape}')  # Debugging line
         return embedding.cpu().numpy().tolist()

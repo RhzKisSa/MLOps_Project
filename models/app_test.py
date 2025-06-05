@@ -86,8 +86,7 @@ if question:
             st.markdown(question)
 
         with st.spinner("🤔 Đang tìm câu trả lời..."):
-            answer = st.session_state.qa.query(question)['result']
-            answer = answer.replace("<|file_separator|>", "").strip()
+            answer = st.session_state.qa.query(question)
 
         with st.chat_message("assistant"):
             st.markdown(answer)

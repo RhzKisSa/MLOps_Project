@@ -4,6 +4,7 @@ from langchain_community.vectorstores import FAISS
 from embedding_model import *
 from config import *
 from prepare_vector_db import *
+import tempfile
 
 class QAChain:
     def __init__(self, llm, vector_db_path='./data/vector_db_path', k=3, max_tokens_limit=1024):
@@ -66,4 +67,6 @@ class QAChain:
     def query(self, question: str):
         if self.chain is None:
             raise ValueError("Chain chưa được tạo. Vui lòng gọi create_chain() hoặc tạo/load DB trước.")
-        return self.chain.invoke({"query": question})
+        return self.chain.invoke({"query": question})['result'].replace("<|file_separator|>", "").strip()
+    
+
