@@ -1,9 +1,12 @@
 from langchain.text_splitter import RecursiveCharacterTextSplitter, CharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader, DirectoryLoader
 from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import GPT4AllEmbeddings
+from langchain.chat_models import init_chat_model
 
-embedding_model = None
-llm_model = None
-PDF_DATA_PATH = None
-VECTOR_DB_PATH = None
+import os
+
+
+os.environ['GOOGLE_API_KEY'] = 'AIzaSyDIjZPXUA1hNJmEHLY_45EgPkDtKAE9r_w'
+# model LLM
+llm = init_chat_model("gemini-2.0-flash", model_provider="google_genai")
+
