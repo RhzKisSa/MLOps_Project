@@ -10,9 +10,17 @@
 ├── save_history.py         # Hàm lưu lịch sử hội thoại
 ├── embedding_model.py         # Dùng để Embedding text
 └── config.py               # Cấu hình mô hình
-
+```
 ## RUN APP
 
-'''sh
+```sh
 streamlit run models/app_test
-'''
+```
+
+## Run API
+```sh
+uvicorn main:app --reload
+```
+## Check APi
+- Truy cập vào locallhost:8080/docs
+- Sau đó test API   
