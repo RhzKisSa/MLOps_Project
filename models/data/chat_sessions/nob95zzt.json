@@ -1,0 +1,13 @@
+{
+  "session_id": "nob95zzt",
+  "history": [
+    {
+      "role": "user",
+      "content": "Hello"
+    },
+    {
+      "role": "assistant",
+      "content": "Xin chào! Tôi có thể giúp gì cho bạn?"
+    }
+  ]
+}

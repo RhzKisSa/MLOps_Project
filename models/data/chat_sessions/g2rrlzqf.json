@@ -1,0 +1,29 @@
+{
+  "session_id": "g2rrlzqf",
+  "history": [
+    {
+      "role": "user",
+      "content": "chào bạn"
+    },
+    {
+      "role": "assistant",
+      "content": "Xin chào! Tôi có thể giúp gì cho bạn?"
+    },
+    {
+      "role": "user",
+      "content": "sadád"
+    },
+    {
+      "role": "assistant",
+      "content": "Tôi có thể giúp gì cho bạn?"
+    },
+    {
+      "role": "user",
+      "content": "dsdsds"
+    },
+    {
+      "role": "assistant",
+      "content": "Tôi không hiểu câu hỏi của bạn. Bạn có thể hỏi lại không?"
+    }
+  ]
+}

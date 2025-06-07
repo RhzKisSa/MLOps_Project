@@ -1,0 +1,37 @@
+{
+  "session_id": "n4bbza5b",
+  "history": [
+    {
+      "role": "user",
+      "content": "Chào bạn"
+    },
+    {
+      "role": "assistant",
+      "content": "Chào bạn! Bạn có câu hỏi gì về Phú Quốc không? Tôi sẽ cố gắng trả lời dựa trên thông tin đã cung cấp."
+    },
+    {
+      "role": "user",
+      "content": "hehe"
+    },
+    {
+      "role": "assistant",
+      "content": "Tôi xin lỗi, tôi không hiểu câu hỏi của bạn. Bạn có thể vui lòng viết lại câu hỏi được không?"
+    },
+    {
+      "role": "user",
+      "content": "áidn"
+    },
+    {
+      "role": "assistant",
+      "content": "Tôi xin lỗi, tôi không hiểu câu hỏi của bạn. Bạn có thể lặp lại câu hỏi của mình không?"
+    },
+    {
+      "role": "user",
+      "content": "ádsa"
+    },
+    {
+      "role": "assistant",
+      "content": "Tôi xin lỗi, tôi không thể trả lời câu hỏi đó. Các thông tin được cung cấp không liên quan đến câu hỏi."
+    }
+  ]
+}

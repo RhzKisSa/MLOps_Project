@@ -1,0 +1,14 @@
+{
+  "session_id": "skfkb7gm",
+  "history": [
+    {
+      "role": "user",
+      "content": "chào bạn"
+    },
+    {
+      "role": "assistant",
+      "content": "Chào bạn! Tôi có thể giúp gì cho bạn?"
+    }
+  ],
+  "session_name": "chào bạn"
+}

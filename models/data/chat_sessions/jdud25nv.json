@@ -1,0 +1,14 @@
+{
+  "session_id": "jdud25nv",
+  "history": [
+    {
+      "role": "user",
+      "content": "chào"
+    },
+    {
+      "role": "assistant",
+      "content": "Xin chào!"
+    }
+  ],
+  "session_name": "3"
+}

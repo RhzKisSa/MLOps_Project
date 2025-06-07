@@ -1,0 +1,45 @@
+{
+  "session_id": "8uyhcb9g",
+  "history": [
+    {
+      "role": "user",
+      "content": "chào bạn"
+    },
+    {
+      "role": "assistant",
+      "content": "Xin chào! Tôi có thể giúp gì cho bạn?"
+    },
+    {
+      "role": "user",
+      "content": "asdf"
+    },
+    {
+      "role": "assistant",
+      "content": "Tôi không thể trả lời câu hỏi này dựa trên thông tin được cung cấp."
+    },
+    {
+      "role": "user",
+      "content": "s"
+    },
+    {
+      "role": "assistant",
+      "content": "Tôi có thể giúp gì cho bạn?"
+    },
+    {
+      "role": "user",
+      "content": "s"
+    },
+    {
+      "role": "assistant",
+      "content": "Tôi có thể giúp gì cho bạn?"
+    },
+    {
+      "role": "user",
+      "content": "chào bạn"
+    },
+    {
+      "role": "assistant",
+      "content": "Chưa upload file PDF nào."
+    }
+  ]
+}

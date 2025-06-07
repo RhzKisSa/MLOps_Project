@@ -1,0 +1,14 @@
+{
+  "session_id": "ej57g271",
+  "history": [
+    {
+      "role": "user",
+      "content": "chào bạn"
+    },
+    {
+      "role": "assistant",
+      "content": "Chào bạn! Tôi có thể giúp gì cho bạn?"
+    }
+  ],
+  "session_name": "chào bạn"
+}

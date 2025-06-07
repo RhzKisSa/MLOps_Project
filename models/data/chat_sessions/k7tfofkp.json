@@ -1,0 +1,30 @@
+{
+  "session_id": "k7tfofkp",
+  "history": [
+    {
+      "role": "user",
+      "content": "Chào bạn"
+    },
+    {
+      "role": "assistant",
+      "content": "Chào bạn! Tôi có thể giúp gì cho bạn?"
+    },
+    {
+      "role": "user",
+      "content": "Giới thiệu vị trí Phú Quốc"
+    },
+    {
+      "role": "assistant",
+      "content": "Đảo Phú Quốc nằm trong vịnh Thái Lan và là hòn đảo lớn nhất Việt Nam với tổng diện tích 589,23 km²."
+    },
+    {
+      "role": "user",
+      "content": "Giới thiệu chi tiết tỉnh phú quốc"
+    },
+    {
+      "role": "assistant",
+      "content": "Phú Quốc là một đơn vị hành chính thuộc tỉnh Kiên Giang, bao gồm 2 thị trấn và 8 xã. Đảo này có diện tích 589,23 km² và vị trí địa lý gần các địa điểm sau:\n\n*   Cách bờ biển Việt Nam 45km.\n*   Cách thành phố Rạch Giá 115km.\n*   Cách thị xã Hà Tiên 4km.\n*   Cách tỉnh Kampot của Campuchia hơn chỉ 18km.\n\nDu khách có thể di chuyển đến Phú Quốc chủ yếu bằng máy bay, tàu cao tốc hoặc phà."
+    }
+  ],
+  "session_name": "Chào bạn"
+}

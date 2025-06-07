@@ -1,0 +1,14 @@
+{
+  "session_id": "0emos2s7",
+  "history": [
+    {
+      "role": "user",
+      "content": "Chào bạn"
+    },
+    {
+      "role": "assistant",
+      "content": "Chào bạn!"
+    }
+  ],
+  "session_name": "Chào bạn"
+}

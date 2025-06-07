@@ -1,0 +1,14 @@
+{
+  "session_id": "5okb8tyo",
+  "history": [
+    {
+      "role": "user",
+      "content": "chào bạn nè"
+    },
+    {
+      "role": "assistant",
+      "content": "Chào bạn!"
+    }
+  ],
+  "session_name": "mô phật"
+}

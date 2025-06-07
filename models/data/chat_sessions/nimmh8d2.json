@@ -1,0 +1,13 @@
+{
+  "session_id": "nimmh8d2",
+  "history": [
+    {
+      "role": "user",
+      "content": "chào bạn"
+    },
+    {
+      "role": "assistant",
+      "content": "Chào bạn! Tôi có thể giúp gì cho bạn?"
+    }
+  ]
+}

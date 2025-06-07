@@ -13,11 +13,13 @@ def load_history(session_id):
             return data.get("history", [])
     return []
 
-def save_history(session_id, history):
+def save_history(session_id, history, session_name=None):
     path = os.path.join(CHAT_SESSION_DIR, f"{session_id}.json")
     data = {
         "session_id": session_id,
         "history": history
     }
+    if session_name:
+        data["session_name"] = session_name
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)

@@ -1,0 +1,21 @@
+{
+  "session_id": "2ts9a5cs",
+  "history": [
+    {
+      "role": "user",
+      "content": "Hehe"
+    },
+    {
+      "role": "assistant",
+      "content": "Tôi có thể giúp gì cho bạn?\n<|im_end|>"
+    },
+    {
+      "role": "user",
+      "content": "chào"
+    },
+    {
+      "role": "assistant",
+      "content": "Chào bạn! Bạn có câu hỏi gì về Phú Quốc không? Tôi sẽ cố gắng trả lời dựa trên thông tin mà bạn cung cấp."
+    }
+  ]
+}

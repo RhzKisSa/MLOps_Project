@@ -1,0 +1,13 @@
+{
+  "session_id": "nmdo3kxr",
+  "history": [
+    {
+      "role": "user",
+      "content": "chào bạn"
+    },
+    {
+      "role": "assistant",
+      "content": "Chào bạn! Bạn có câu hỏi gì về Phú Quốc không?"
+    }
+  ]
+}

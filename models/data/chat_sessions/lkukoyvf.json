@@ -1,0 +1,14 @@
+{
+  "session_id": "lkukoyvf",
+  "history": [
+    {
+      "role": "user",
+      "content": "hehe"
+    },
+    {
+      "role": "assistant",
+      "content": "Tôi không biết."
+    }
+  ],
+  "session_name": "hehe"
+}

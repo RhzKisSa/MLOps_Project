@@ -1,0 +1,45 @@
+{
+  "session_id": "jm7kknkj",
+  "history": [
+    {
+      "role": "user",
+      "content": "Chào bạn"
+    },
+    {
+      "role": "assistant",
+      "content": "Chào bạn! Tôi có thể giúp gì cho bạn?"
+    },
+    {
+      "role": "user",
+      "content": "bạn là ai"
+    },
+    {
+      "role": "assistant",
+      "content": "Tôi là một mô hình ngôn ngữ lớn, được Google huấn luyện."
+    },
+    {
+      "role": "user",
+      "content": "tôi là vĩnh"
+    },
+    {
+      "role": "assistant",
+      "content": "Được rồi, tôi hiểu. Bạn tên là Vĩnh. Tôi có thể giúp gì cho bạn?"
+    },
+    {
+      "role": "user",
+      "content": "có vài câu hỏi tôi muốn hỏi bạn"
+    },
+    {
+      "role": "assistant",
+      "content": "Được thôi, cứ hỏi đi."
+    },
+    {
+      "role": "user",
+      "content": "bạn bao nhiêu tuổi"
+    },
+    {
+      "role": "assistant",
+      "content": "Tôi không biết. Tôi là một mô hình ngôn ngữ lớn, không phải là một con người."
+    }
+  ]
+}

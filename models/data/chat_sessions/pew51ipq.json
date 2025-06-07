@@ -1,0 +1,13 @@
+{
+  "session_id": "pew51ipq",
+  "history": [
+    {
+      "role": "user",
+      "content": "Chào bạn"
+    },
+    {
+      "role": "assistant",
+      "content": "Chào bạn! Tôi có thể giúp gì cho bạn?"
+    }
+  ]
+}

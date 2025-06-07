@@ -1,0 +1,22 @@
+{
+  "session_id": "iqhw4xi5",
+  "history": [
+    {
+      "role": "user",
+      "content": "Chào bạn"
+    },
+    {
+      "role": "assistant",
+      "content": "Chào bạn! Tôi có thể giúp gì cho bạn về Phú Quốc?"
+    },
+    {
+      "role": "user",
+      "content": "giới thiệu về đảo phú quốc "
+    },
+    {
+      "role": "assistant",
+      "content": "Phú Quốc là hòn đảo lớn nhất Việt Nam, nằm trong vịnh Thái Lan. Đảo có diện tích 589,23 km², trong đó đảo Phú Quốc lớn nhất có diện tích 567 km² (56.700 ha) và dài 49 km. Vùng biển Phú Quốc có 22 hòn đảo lớn nhỏ. Phú Quốc được mệnh danh là đảo ngọc và là một thiên đường nghỉ dưỡng của Việt Nam với những bãi biển đẹp.\n\nNăm 2019, Thủ tướng chính phủ tiếp tục quy hoạch Phú Quốc thành đặc khu kinh tế. Cơ sở hạ tầng phục vụ du lịch Phú Quốc đã quy hoạch chi tiết 22 khu du lịch, với tổng diện tích 5.172ha."
+    }
+  ],
+  "session_name": "10"
+}

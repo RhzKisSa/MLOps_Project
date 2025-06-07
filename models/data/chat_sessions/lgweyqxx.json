@@ -1,0 +1,14 @@
+{
+  "session_id": "lgweyqxx",
+  "history": [
+    {
+      "role": "user",
+      "content": "chào bạn"
+    },
+    {
+      "role": "assistant",
+      "content": "Xin chào! Tôi có thể giúp gì cho bạn?"
+    }
+  ],
+  "session_name": "hehe"
+}
