@@ -1,0 +1,13 @@
+{
+  "session_id": "9iwh4fw5",
+  "history": [
+    {
+      "role": "user",
+      "content": "chào"
+    },
+    {
+      "role": "assistant",
+      "content": "Xin chào!"
+    }
+  ]
+}

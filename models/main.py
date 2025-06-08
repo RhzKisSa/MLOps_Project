@@ -98,7 +98,3 @@ def list_sessions():
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
 
-# run main 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8081, reload=True)
