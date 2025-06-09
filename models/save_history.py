@@ -23,3 +23,10 @@ def save_history(session_id, history, session_name=None):
         data["session_name"] = session_name
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
+
+def delete_history(session_id):
+    path = os.path.join(CHAT_SESSION_DIR, f"{session_id}.json")
+    if os.path.exists(path):
+        os.remove(path)
+        return True
+    return False

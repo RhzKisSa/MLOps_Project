@@ -161,18 +161,58 @@ function App() {
     fetch(`${API_BASE}/list_sessions/`).then(res => res.json()).then(data => setAllSessions(data.sessions || []));
   };
 
+  // Xoá session
+  const handleDeleteSession = async (sid) => {
+    if (!window.confirm('Bạn có chắc muốn xoá đoạn chat này?')) return;
+    try {
+      const res = await fetch(`${API_BASE}/history/${sid}`, { method: 'DELETE' });
+      if (res.ok) {
+        setAllSessions(sessions => sessions.filter(s => s.id !== sid));
+        // Nếu đang xem session bị xoá thì chuyển về session hiện tại
+        if ((selectedSession || sessionId) === sid) {
+          setSelectedSession(null);
+          setChatHistory([]);
+        }
+      } else {
+        alert('Xoá không thành công!');
+      }
+    } catch {
+      alert('Lỗi kết nối khi xoá!');
+    }
+  };
+
   return (
     <div className="gpt-layout">
       <aside className="gpt-sidebar">
         <h2>Lịch sử chat</h2>
         <ul className="gpt-session-list">
+          <li
+            key="current-session"
+            className={!selectedSession || selectedSession === sessionId ? 'active' : ''}
+            style={{ fontWeight: 'bold', color: '#1976d2', cursor: 'pointer' }}
+            onClick={() => setSelectedSession(null)}
+          >
+            ⬅️ Quay lại đoạn chat hiện tại
+          </li>
           {allSessions.map(session => (
             <li
               key={session.id}
               className={session.id === (selectedSession || sessionId) ? 'active' : ''}
               onClick={() => setSelectedSession(session.id)}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
             >
-              {session.id === sessionId ? 'Phiên hiện tại' : (session.name || session.id)}
+              <span style={{ flex: 1, cursor: 'pointer' }}>
+                {session.id === sessionId ? 'Phiên hiện tại' : (session.name || session.id)}
+              </span>
+              {session.id !== sessionId && (
+                <button
+                  title="Xoá đoạn chat"
+                  style={{ marginLeft: 8, color: 'red', background: 'none', border: 'none', cursor: 'pointer' }}
+                  onClick={e => { e.stopPropagation(); handleDeleteSession(session.id); }}
+                >
+                  🗑️
+                </button>
+              )}
             </li>
           ))}
         </ul>
@@ -222,7 +262,7 @@ function App() {
               </div>
             ))}
           </div>
-          <form onSubmit={handleAsk} className="gpt-chat-input-form">
+          <form onSubmit={handleAsk} className="gpt-chat-input-form" style={{ display: selectedSession && selectedSession !== sessionId ? 'none' : 'flex' }}>
             <input
               type="text"
               placeholder="Nhập câu hỏi..."

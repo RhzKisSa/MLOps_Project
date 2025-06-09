@@ -6,7 +6,7 @@ from fastapi.responses import JSONResponse
 import tempfile
 import shutil
 import os
-from save_history import save_history, load_history
+from save_history import save_history, load_history, delete_history
 
 app = FastAPI()
 app.add_middleware(
@@ -70,6 +70,17 @@ async def get_chat_history(session_id: str):
     try:
         history = load_history(session_id)
         return {"session_id": session_id, "history": history}
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
+@app.delete("/history/{session_id}")
+async def delete_chat_history(session_id: str):
+    try:
+        deleted = delete_history(session_id)
+        if deleted:
+            return {"message": f"Đã xoá lịch sử chat với session_id: {session_id}"}
+        else:
+            return JSONResponse(status_code=404, content={"error": "Không tìm thấy session_id"})
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
 

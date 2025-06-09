@@ -1,10 +1,10 @@
-
 ## Khởi động
 
 
 ## Run API
 ```sh
-uvicorn main:app --reload -- port 8081
+cd ./models
+uvicorn main:app --reload --port 8081
 ```
 
 
