@@ -1,0 +1,30 @@
+{
+  "session_id": "dshayvu5",
+  "history": [
+    {
+      "role": "user",
+      "content": "xin chào bạn "
+    },
+    {
+      "role": "assistant",
+      "content": "Chào bạn! Tôi có thể giúp gì cho bạn?"
+    },
+    {
+      "role": "user",
+      "content": "bạn có thể cho tôi biết vườn quốc gia ở đâu ?"
+    },
+    {
+      "role": "assistant",
+      "content": "Vườn quốc gia Phong Nha-Kẻ Bàng.<|im_end|>"
+    },
+    {
+      "role": "user",
+      "content": "đặc điểm nổi bật ?"
+    },
+    {
+      "role": "assistant",
+      "content": "Phong Nha-Kẻ Bàng là kết quả tổng hợp của 5 giai đoạn phát triển lớn trong lịch sử phát triển vỏ Trái Đất trong khu vực. Khu vực này có thác Chài cao khoảng 50 m, có bãi Ràn Bò (nơi bò tót sinh sống và sinh đẻ). Ngoài ra, khu vực này còn có nhiều địa danh được gọi theo đặc điểm của rừng như Nước Ngang."
+    }
+  ],
+  "session_name": "hỏi đáp vềvườn cúc phương"
+}
