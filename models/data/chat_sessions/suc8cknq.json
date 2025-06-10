@@ -1,0 +1,21 @@
+{
+  "session_id": "suc8cknq",
+  "history": [
+    {
+      "role": "user",
+      "content": "diện tích khu vực là bao nhiêu ?"
+    },
+    {
+      "role": "assistant",
+      "content": "Tôi không thể trả lời câu hỏi này dựa trên thông tin được cung cấp."
+    },
+    {
+      "role": "user",
+      "content": "đặc điểm nổi bật của vườn quốc gia là gì ?"
+    },
+    {
+      "role": "assistant",
+      "content": "Vườn quốc gia Phong Nha-Kẻ Bàng có những đặc điểm nổi bật sau:\n\n*   Được UNESCO công nhận là di sản thiên nhiên thế giới lần 2 với hai tiêu chí địa chất địa mạo và đa dạng sinh học.\n*   Tính đa dạng sinh học sánh ngang với các khu vực đã được công nhận là di sản hay các khu đề xuất ở châu Á và châu Úc, đặc biệt so sánh với các khu di sản hoặc đang đề xuất có chứa núi đá vôi.\n*   Có một khu vực rừng bách xanh được phân bổ trên đỉnh núi đá vôi có diện tích khoảng trên 5000 ha, có khoảng 2500 cây với mật độ 600 cây/ha. Các cây bách xanh ở vườn quốc gia Phong Nha-Kẻ Bàng có tuổi 500-600 năm. Đây là quần thể bách xanh núi đá (Calocedrus rupestris) lớn nhất Việt Nam."
+    }
+  ]
+}

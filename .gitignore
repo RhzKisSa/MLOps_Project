@@ -1,5 +1,4 @@
 mlops_env
-/data
 Monitoring/prometheus/data/
 Monitoring/prometheus/prometheus
 data/vector_db_path
