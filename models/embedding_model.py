@@ -2,6 +2,7 @@ import torch
 from langchain.embeddings.base import Embeddings
 from transformers import AutoTokenizer, AutoModel
 
+
 class PhoBERTEmbeddings(Embeddings):
     def __init__(self, model_name="vinai/phobert-base"):
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -25,3 +26,13 @@ class PhoBERTEmbeddings(Embeddings):
         last_hidden_state = outputs.last_hidden_state  # shape: (1, seq_len, hidden_size)
         embedding = torch.mean(last_hidden_state, dim=1).squeeze()  # mean pooling
         return embedding.cpu().numpy().tolist()
+
+# test
+if __name__ == "__main__":
+    model = PhoBERTEmbeddings()
+    texts = ["Đây là một câu ví dụ.", "Học máy rất thú vị!"]
+    embeddings = model.embed_documents(texts)
+    print(embeddings)
+    
+    query_embedding = model.embed_query("Câu truy vấn mẫu")
+    print(query_embedding)

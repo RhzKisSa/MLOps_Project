@@ -10,3 +10,4 @@ os.environ['GOOGLE_API_KEY'] = 'AIzaSyDIjZPXUA1hNJmEHLY_45EgPkDtKAE9r_w'
 # model LLM
 llm = init_chat_model("gemini-2.0-flash", model_provider="google_genai")
 
+
