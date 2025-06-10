@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ..  # The folder containing the Dockerfile
+      dockerfile: models/Dockerfile
+    container_name: fastapi_backend
+    ports:
+      - "8081:8080"
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ../Front_end
+    container_name: react_frontend
+    ports:
+      - "3005:3000"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
