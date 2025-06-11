@@ -22,5 +22,5 @@ streamlit run models/app_test
 uvicorn main:app --reload -- port 8081
 ```
 ## Check APi
-- Truy cập vào locallhost:8080/docs
+- Truy cập vào locallhost:8081/docs
 - Sau đó test API   
