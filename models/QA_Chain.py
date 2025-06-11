@@ -1,7 +1,6 @@
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 from langchain_community.vectorstores import FAISS
-from embedding_model import *
 from config import *
 from prepare_vector_db import *
 import tempfile
@@ -10,7 +9,7 @@ class QAChain:
     def __init__(self, llm, vector_db_path='./data/vector_db_path', k=3, max_tokens_limit=1024):
         os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
         self.vector_db_path = vector_db_path
-        self.embedding_model = PhoBERTEmbeddings()
+        self.embedding_model = embeddings
         self.llm = llm
         self.k = k
         self.max_tokens_limit = max_tokens_limit

@@ -1,13 +1,13 @@
 from langchain.text_splitter import RecursiveCharacterTextSplitter, CharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader, DirectoryLoader
 from langchain_community.vectorstores import FAISS
-from embedding_model import PhoBERTEmbeddings  # class embedding của bạn
+from config import *
 import os
 
 class VectorDBCreator:
     def __init__(self, vector_db_path='./data/vector_db_path'):
         self.vector_db_path = vector_db_path
-        self.embedding_model = PhoBERTEmbeddings()
+        self.embedding_model = embeddings
 
     def create_db_from_text(self, raw_text: str):
         # Chia nhỏ text

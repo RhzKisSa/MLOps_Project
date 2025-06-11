@@ -7,7 +7,7 @@ services:
       dockerfile: models/Dockerfile
     container_name: fastapi_backend
     ports:
-      - "8081:8080"
+      - "8085:8085"
     networks:
       - app-network
 
@@ -16,7 +16,7 @@ services:
       context: ../Front_end
     container_name: react_frontend
     ports:
-      - "3005:3000"
+      - "3005:80"
     depends_on:
       - backend
     networks:
