@@ -2,12 +2,13 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Copy requirements.txt from one level above
-COPY ../requirements.txt ./requirements.txt
+# Copy requirements and install
+COPY requirements.txt .
+RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy entire source code into container
+COPY . .
 
-COPY models/ .
-
+# Run the FastAPI service from models package
+WORKDIR /app/models
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8085"]

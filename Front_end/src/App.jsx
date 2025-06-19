@@ -22,7 +22,7 @@ function App() {
   const fileInputRef = useRef();
 
   // Đổi URL này thành địa chỉ backend của bạn nếu cần
-  const API_BASE = 'http://localhost:8082';
+  const API_BASE = 'http://localhost:8085';
 
   // Lấy danh sách file lịch sử (dựa vào file trong data/chat_sessions)
   useEffect(() => {
