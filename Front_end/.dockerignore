@@ -1,1 +1,32 @@
 node_modules
+
+# Dữ liệu lớn
+data/
+models/data/
+models/data/chat_sessions/
+models/data/vector_db_path/
+
+# Môi trường ảo python
+mlops/
+venv/
+.env/
+.env
+
+# Cache python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Git, DVC, log, tạm
+.git/
+.gitignore
+.dvc/
+.dvcignore
+data.dvc
+dvc.yaml
+*.log
+
+# Frontend build, node_modules
+Front_end/node_modules/
+Front_end/dist/

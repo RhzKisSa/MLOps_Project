@@ -6,28 +6,30 @@ global:
 alerting:
   alertmanagers:
     - static_configs:
-        - targets:
-          - alertmanager:9093
+        - targets: ['alertmanager:9093']
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
   - "jenkins_rules.yml"
   - "loki_rules.yml"
+  - "prometheus_rules.yml"
+  - "nginx_rules.yml"
+  - "promtail_rules.yml"
 
 # Here it's Prometheus itself.
 scrape_configs:
   - job_name: "node"
     static_configs:
-      - targets: ['host.docker.internal:9100']
+      - targets: ['192.168.28.38:9100']
   - job_name: "loki"
     static_configs:
-      - targets: ['host.docker.internal:3100']
+      - targets: ['192.168.28.38:8001']
   - job_name: "alertmanager"
     static_configs:
-      - targets: ['host.docker.internal:9093']
+      - targets: ['192.168.28.38:8081']
   - job_name: "promtail"
     static_configs:
-      - targets: ['promtail:9080']
+      - targets: ['192.168.28.38:8002']
   - job_name: "fastapi"
     static_configs:
-      - targets: ['host.docker.internal:8085']
+      - targets: ['192.168.28.38:8085']

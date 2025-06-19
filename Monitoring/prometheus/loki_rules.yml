@@ -2,10 +2,18 @@ groups:
   - name: Loki
 
     rules:
-
+      - alert: LokiDown
+        expr: absent(up{job=~".*loki.*"} == 1)
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: Loki instance is down (instance {{ $labels.instance }})
+          description: "Loki không còn được Prometheus scrape (có thể đã tắt hoặc unreachable)."
+      
       - alert: LokiProcessTooManyRestarts
         expr: 'changes(process_start_time_seconds{job=~".*loki.*"}[15m]) > 2'
-        for: 5m
+        for: 15m
         labels:
           severity: warning
         annotations:

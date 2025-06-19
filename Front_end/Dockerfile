@@ -16,7 +16,7 @@ RUN npm run build
 RUN npm install -g serve
 
 # Expose the port for the server
-EXPOSE 3006
+EXPOSE 8000
 
 # Serve the built app on all interfaces
-CMD ["serve", "-s", "dist", "-l", "tcp://0.0.0.0:3006"]
+CMD ["serve", "-s", "dist", "-l", "tcp://0.0.0.0:8000"]

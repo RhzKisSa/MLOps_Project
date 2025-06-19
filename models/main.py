@@ -10,62 +10,58 @@ from save_history import save_history, load_history, delete_history
 import logging
 import sys
 import io
-from logging.handlers import SysLogHandler, RotatingFileHandler
+from logging.handlers import RotatingFileHandler
 from prometheus_fastapi_instrumentator import Instrumentator
 
 # Cấu hình logging
 LOG_DIR = "/app/logs"  # Sử dụng đường dẫn tuyệt đối trong container
-try:
-    os.makedirs(LOG_DIR, exist_ok=True)
-    # Đảm bảo thư mục có quyền ghi
-    os.chmod(LOG_DIR, 0o777)
-except Exception as e:
-    print(f"Error creating log directory: {e}")
-    sys.exit(1)
+os.makedirs(LOG_DIR, exist_ok=True)
+os.chmod(LOG_DIR, 0o777)
 
-# Tạo logger
+# Xóa các handler cũ
 logger = logging.getLogger()
-# Xóa các handlers cũ
 for h in list(logger.handlers):
     logger.removeHandler(h)
-
-# Formatter cho logfmt
-fmt = logging.Formatter('ts="%(asctime)s" level="%(levelname)s" name="%(name)s" msg="%(message)s"')
-
-# Set level cho root logger
 logger.setLevel(logging.DEBUG)
 
-# 1. Log file handler - lưu tất cả các log
-log_file = os.path.join(LOG_DIR, "fastapi_app.log")
-logfile_handler = RotatingFileHandler(
-    log_file,
-    maxBytes=10*1024*1024,
-    backupCount=5,
-    mode='a'  # Append mode
-)
-logfile_handler.setLevel(logging.DEBUG)  # Lưu tất cả các level
-logfile_handler.setFormatter(fmt)
-logger.addHandler(logfile_handler)
+fmt = logging.Formatter('ts="%(asctime)s" level="%(levelname)s" name="%(name)s" msg="%(message)s"')
 
-# 2. Console handler - log ra console
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.INFO)
-console_handler.setFormatter(fmt)
-logger.addHandler(console_handler)
+# 1. fastapi_app.log: log ứng dụng (DEBUG+)
+app_file = os.path.join(LOG_DIR, "fastapi_app.log")
+app_handler = RotatingFileHandler(app_file, maxBytes=10*1024*1024, backupCount=5, mode='a')
+app_handler.setLevel(logging.DEBUG)
+app_handler.setFormatter(fmt)
+logger.addHandler(app_handler)
 
-# Log test messages
-logger.debug("This is a test debug message")
-logger.debug("Another debug message with special chars: !@#$%^&*()")
-logger.debug("Testing debug level with numbers: 12345")
-logger.info("This is an info message")
-logger.warning("This is a warning message")
-logger.error("This is an error message")
+# 2. syslog.log: log hệ thống (INFO+)
+syslog_file = os.path.join(LOG_DIR, "syslog.log")
+syslog_handler = RotatingFileHandler(syslog_file, maxBytes=5*1024*1024, backupCount=3, mode='a')
+syslog_handler.setLevel(logging.INFO)
+syslog_handler.setFormatter(fmt)
+logger.addHandler(syslog_handler)
+
+# 3. stdout.log: chỉ log ra stdout (INFO+)
+stdout_file = os.path.join(LOG_DIR, "stdout.log")
+stdout_handler = RotatingFileHandler(stdout_file, maxBytes=5*1024*1024, backupCount=3, mode='a')
+stdout_handler.setLevel(logging.INFO)
+stdout_handler.setFormatter(fmt)
+stdout_handler.stream = sys.stdout
+logger.addHandler(stdout_handler)
+
+# 4. stderr.log: chỉ log ra stderr (ERROR+)
+stderr_file = os.path.join(LOG_DIR, "stderr.log")
+stderr_handler = RotatingFileHandler(stderr_file, maxBytes=5*1024*1024, backupCount=3, mode='a')
+stderr_handler.setLevel(logging.ERROR)
+stderr_handler.setFormatter(fmt)
+stderr_handler.stream = sys.stderr
+logger.addHandler(stderr_handler)
 
 # Đảm bảo file log có quyền ghi
-try:
-    os.chmod(log_file, 0o666)
-except Exception as e:
-    print(f"Error setting log file permissions: {e}")
+for f in [app_file, syslog_file, stdout_file, stderr_file]:
+    try:
+        os.chmod(f, 0o666)
+    except Exception as e:
+        print(f"Error setting log file permissions: {e}")
 
 app = FastAPI()
 app.add_middleware(

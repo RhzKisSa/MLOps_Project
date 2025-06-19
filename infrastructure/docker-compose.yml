@@ -1,5 +1,12 @@
 version: '3.8'
 
+volumes:
+  fastapi-logs:
+    external: true
+  grafana-data: {}
+  prometheus-data: {}
+  alertmanager-data: {}
+
 services:
   backend:
     build:
@@ -8,6 +15,8 @@ services:
     container_name: fastapi_backend
     ports:
       - "8085:8085"
+    volumes:
+      - fastapi-logs:/app/logs
     networks:
       - app-network
 
@@ -16,12 +25,102 @@ services:
       context: ../Front_end
     container_name: react_frontend
     ports:
-      - "3006:3006"
+      - "8000:8000"
     depends_on:
       - backend
     networks:
       - app-network
 
+  loki:
+    image: grafana/loki:2.9.3
+    ports:
+      - "8001:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    restart: unless-stopped
+    networks:
+      - prom
+
+  promtail:
+    image: grafana/promtail:2.9.3
+    ports:
+      - "8002:9080"
+    volumes:
+      - fastapi-logs:/app/logs
+      - /var/run/docker.sock:/var/run/docker.sock
+      # - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - ../Monitoring/promtail-config.yaml:/etc/promtail/config.yaml
+      - /var/log:/var/log
+    command: -config.file=/etc/promtail/config.yaml
+    restart: unless-stopped
+    networks:
+      - prom
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    restart: unless-stopped
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+      - /var/log:/var/log:ro
+      - /run/udev/data:/run/udev/data:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+      - '--collector.textfile.directory=/var/log'
+    networks:
+      - prom
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    restart: unless-stopped
+    networks:
+      - prom
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "8080:9090"
+    volumes:
+      - ../Monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ../Monitoring/prometheus/jenkins_rules.yml:/etc/prometheus/jenkins_rules.yml
+      - ../Monitoring/prometheus/loki_rules.yml:/etc/prometheus/loki_rules.yml
+      - ../Monitoring/prometheus/prometheus_rules.yml:/etc/prometheus/prometheus_rules.yml
+      - ../Monitoring/prometheus/nginx_rules.yml:/etc/prometheus/nginx_rules.yml
+      - ../Monitoring/prometheus/promtail_rules.yml:/etc/prometheus/promtail_rules.yml
+      - prometheus-data:/prometheus  
+    command:
+      - '--web.enable-lifecycle'
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    restart: unless-stopped
+    networks:
+      - prom
+
+  alertmanager:
+    image: prom/alertmanager
+    container_name: alertmanager
+    ports:
+      - "8081:9093"
+    restart: unless-stopped
+    volumes:
+      - ../Monitoring/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      - alertmanager-data:/data
+    networks:
+      - prom
+
 networks:
   app-network:
     driver: bridge
+  prom:
+    external: true
