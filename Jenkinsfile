@@ -9,23 +9,6 @@ pipeline {
   }
 
   stages {
-
-    stage('Lấy mã nguồn từ GitHub') {
-      steps {
-        checkout scm
-      }
-      post {
-        failure {
-          emailext(
-            subject: "❌ FAILED: Checkout stage in ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-            body: """<p>Stage <b>Checkout</b> failed in <b>${env.JOB_NAME}</b> build #${env.BUILD_NUMBER}.</p>
-                     <p><a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
-            to: 'khanh2003dakdoa@gmail.com'
-          )
-        }
-      }
-    }
-
     stage('Tạo thư mục nếu chưa có') {
       steps {
         script {
