@@ -34,31 +34,31 @@ pipeline {
     }
 
     stage('Sao chép mã nguồn bằng SCP') {
-      steps {
-        script {
-          sshagent(['deploy-key']) {
-            sh """
-              echo "🗂️ Xoá nội dung cũ trên server..."
-              ssh ${DEPLOY_USER}@${DEPLOY_HOST} 'rm -rf ${REMOTE_DIR}/*'
+  steps {
+    script {
+      sshagent(['deploy-key']) {
+        sh """
+          echo "🗂️ Xoá nội dung cũ trên server..."
+          ssh ${DEPLOY_USER}@${DEPLOY_HOST} 'rm -rf ${REMOTE_DIR}/*'
 
-              echo "📤 Copy toàn bộ project lên server..."
-              scp -r $(ls -A | grep -v '.git') ${DEPLOY_USER}@${DEPLOY_HOST}:${REMOTE_DIR}/
-
-            """
-          }
-        }
-      }
-      post {
-        failure {
-          emailext(
-            subject: "❌ FAILED: Upload code (SCP) stage in ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-            body: """<p>Stage <b>Upload Code</b> failed in build #${env.BUILD_NUMBER}.</p>
-                     <p><a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
-            to: 'khanh2003dakdoa@gmail.com'
-          )
-        }
+          echo "📤 Copy toàn bộ project (loại .git) lên server..."
+          scp -r \$(ls -A | grep -v '.git') ${DEPLOY_USER}@${DEPLOY_HOST}:${REMOTE_DIR}/
+        """
       }
     }
+  }
+  post {
+    failure {
+      emailext(
+        subject: "❌ FAILED: Upload code stage in ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+        body: """<p>Stage <b>Upload Code</b> failed.</p>
+                 <p><a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
+        to: 'khanh2003dakdoa@gmail.com'
+      )
+    }
+  }
+}
+
 
     stage('Tạo volume và network nếu chưa có') {
       steps {
