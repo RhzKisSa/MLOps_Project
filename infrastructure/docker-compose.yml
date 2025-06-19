@@ -3,7 +3,7 @@ version: '3.8'
 services:
   backend:
     build:
-      context: ..  # The folder containing the Dockerfile
+      context: ..  
       dockerfile: models/Dockerfile
     container_name: fastapi_backend
     ports:
@@ -16,7 +16,7 @@ services:
       context: ../Front_end
     container_name: react_frontend
     ports:
-      - "3005:80"
+      - "3006:3006"
     depends_on:
       - backend
     networks:
