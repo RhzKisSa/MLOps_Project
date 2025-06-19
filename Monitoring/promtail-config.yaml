@@ -1,0 +1,60 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: local
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: varlogs
+          __path__: /var/log/*.log
+          
+  - job_name: docker
+    docker_sd_configs:
+      - host: unix:///var/run/docker.sock
+        refresh_interval: 5s
+    relabel_configs:
+      - source_labels: ['__meta_docker_container_name']
+        regex: '/(.*)'
+        target_label: 'container'
+      - source_labels: ['__meta_docker_container_log_stream']
+        target_label: 'logstream'
+
+  - job_name: syslog
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: syslog
+          log_type: system
+          __path__: /app/logs/syslog.log
+
+  - job_name: stdout
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: stdout
+          log_type: console
+          __path__: /app/logs/stdout.log
+
+  - job_name: stderr
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: stderr
+          log_type: error
+          __path__: /app/logs/stderr.log
+
+  - job_name: fastapi_app
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: fastapi_app
+          log_type: application
+          __path__: /app/logs/fastapi_app.log

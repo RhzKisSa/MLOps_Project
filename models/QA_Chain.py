@@ -68,4 +68,3 @@ class QAChain:
             raise ValueError("Chain chưa được tạo. Vui lòng gọi create_chain() hoặc tạo/load DB trước.")
         return self.chain.invoke({"query": question})['result'].replace("<|file_separator|>", "").strip()
     
-
