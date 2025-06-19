@@ -42,7 +42,8 @@ pipeline {
               ssh ${DEPLOY_USER}@${DEPLOY_HOST} 'rm -rf ${REMOTE_DIR}/*'
 
               echo "📤 Copy toàn bộ project lên server..."
-              scp -r . ${DEPLOY_USER}@${DEPLOY_HOST}:${REMOTE_DIR}/
+              scp -r $(ls -A | grep -v '.git') ${DEPLOY_USER}@${DEPLOY_HOST}:${REMOTE_DIR}/
+
             """
           }
         }
