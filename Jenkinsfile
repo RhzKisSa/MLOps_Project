@@ -10,6 +10,22 @@ pipeline {
 
   stages {
 
+    stage('Lấy mã nguồn từ GitHub') {
+      steps {
+        checkout scm
+      }
+      post {
+        failure {
+          emailext(
+            subject: "❌ FAILED: Checkout stage in ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: """<p>Stage <b>Checkout</b> failed in <b>${env.JOB_NAME}</b> build #${env.BUILD_NUMBER}.</p>
+                     <p><a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
+            to: 'khanh2003dakdoa@gmail.com'
+          )
+        }
+      }
+    }
+
     stage('Tạo thư mục nếu chưa có') {
       steps {
         script {
@@ -34,12 +50,16 @@ pipeline {
       }
     }
 
-    stage('Sao chép mã nguồn lên server') {
+    stage('Sao chép mã nguồn bằng SCP') {
       steps {
         script {
           sshagent(['deploy-key']) {
             sh """
-              rsync -az --delete ./ ${DEPLOY_USER}@${DEPLOY_HOST}:${REMOTE_DIR}/
+              echo "🗂️ Xoá nội dung cũ trên server..."
+              ssh ${DEPLOY_USER}@${DEPLOY_HOST} 'rm -rf ${REMOTE_DIR}/*'
+
+              echo "📤 Copy toàn bộ project lên server..."
+              scp -r . ${DEPLOY_USER}@${DEPLOY_HOST}:${REMOTE_DIR}/
             """
           }
         }
@@ -47,7 +67,7 @@ pipeline {
       post {
         failure {
           emailext(
-            subject: "❌ FAILED: Upload code stage in ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            subject: "❌ FAILED: Upload code (SCP) stage in ${env.JOB_NAME} #${env.BUILD_NUMBER}",
             body: """<p>Stage <b>Upload Code</b> failed in build #${env.BUILD_NUMBER}.</p>
                      <p><a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
             to: 'khanh2003dakdoa@gmail.com'
