@@ -5,7 +5,7 @@ pipeline {
     DEPLOY_USER = 'mlops'
     DEPLOY_HOST = '192.168.28.38'
     REMOTE_DIR = '/home/mlops/chat-app'
-    COMPOSE_FILE = 'infrastructure/dockercompose.yml'
+    COMPOSE_FILE = 'infrastructure/docker-compose.yml'
   }
 
   stages {
