@@ -6,7 +6,7 @@ from prepare_vector_db import *
 import tempfile
 
 class QAChain:
-    def __init__(self, llm, vector_db_path='./data/vector_db_path', k=3, max_tokens_limit=1024):
+    def __init__(self, llm, vector_db_path='./data/vector_db_path', k=5, max_tokens_limit=1024):
         os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
         self.vector_db_path = vector_db_path
         self.embedding_model = embeddings
@@ -68,4 +68,3 @@ class QAChain:
             raise ValueError("Chain chưa được tạo. Vui lòng gọi create_chain() hoặc tạo/load DB trước.")
         return self.chain.invoke({"query": question})['result'].replace("<|file_separator|>", "").strip()
     
-
