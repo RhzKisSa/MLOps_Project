@@ -7,6 +7,65 @@ import tempfile
 import shutil
 import os
 from save_history import save_history, load_history, delete_history
+import logging
+import sys
+import io
+from logging.handlers import SysLogHandler, RotatingFileHandler
+from prometheus_fastapi_instrumentator import Instrumentator
+
+# Cấu hình logging
+LOG_DIR = "/app/logs"  # Sử dụng đường dẫn tuyệt đối trong container
+try:
+    os.makedirs(LOG_DIR, exist_ok=True)
+    # Đảm bảo thư mục có quyền ghi
+    os.chmod(LOG_DIR, 0o777)
+except Exception as e:
+    print(f"Error creating log directory: {e}")
+    sys.exit(1)
+
+# Tạo logger
+logger = logging.getLogger()
+# Xóa các handlers cũ
+for h in list(logger.handlers):
+    logger.removeHandler(h)
+
+# Formatter cho logfmt
+fmt = logging.Formatter('ts="%(asctime)s" level="%(levelname)s" name="%(name)s" msg="%(message)s"')
+
+# Set level cho root logger
+logger.setLevel(logging.DEBUG)
+
+# 1. Log file handler - lưu tất cả các log
+log_file = os.path.join(LOG_DIR, "fastapi_app.log")
+logfile_handler = RotatingFileHandler(
+    log_file,
+    maxBytes=10*1024*1024,
+    backupCount=5,
+    mode='a'  # Append mode
+)
+logfile_handler.setLevel(logging.DEBUG)  # Lưu tất cả các level
+logfile_handler.setFormatter(fmt)
+logger.addHandler(logfile_handler)
+
+# 2. Console handler - log ra console
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.INFO)
+console_handler.setFormatter(fmt)
+logger.addHandler(console_handler)
+
+# Log test messages
+logger.debug("This is a test debug message")
+logger.debug("Another debug message with special chars: !@#$%^&*()")
+logger.debug("Testing debug level with numbers: 12345")
+logger.info("This is an info message")
+logger.warning("This is a warning message")
+logger.error("This is an error message")
+
+# Đảm bảo file log có quyền ghi
+try:
+    os.chmod(log_file, 0o666)
+except Exception as e:
+    print(f"Error setting log file permissions: {e}")
 
 app = FastAPI()
 app.add_middleware(
@@ -16,6 +75,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+Instrumentator().instrument(app).expose(app)  # expose /metrics
 
 # Khởi tạo global QAChain
 qa_chain = QAChain(llm=llm)
