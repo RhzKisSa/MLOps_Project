@@ -7,10 +7,11 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings
 import os
 
 
-os.environ['GOOGLE_API_KEY'] = 'AIzaSyDIjZPXUA1hNJmEHLY_45EgPkDtKAE9r_w'
+os.environ['GOOGLE_API_KEY'] = '...'
 # model LLM
-llm = init_chat_model("gemini-2.0-flash", model_provider="google_genai")
+llm = init_chat_model("...", model_provider="google_genai")
 embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+
 
 
 
